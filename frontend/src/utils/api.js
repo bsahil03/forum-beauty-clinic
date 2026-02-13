@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const api = axios.create({
   baseURL: process.env.NODE_ENV === 'production' 
-    ? 'https://your-backend-domain.com/api' 
+    ? 'https://forum-beauty-clinic.onrender.com/api' 
     : 'http://localhost:5000/api',
 });
 
