@@ -1,0 +1,217 @@
+/* user-professional.css – Premium Beauty Clinic User UI (2025) */
+
+.user-hero {
+  background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)),
+              url('your-hero-image.png') center/cover no-repeat;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+  position: relative;
+}
+
+.user-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, rgba(232,62,140,0.15), rgba(212,175,55,0.1));
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 2rem;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(3.2rem, 8vw, 5.5rem);
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  letter-spacing: -1px;
+}
+
+.hero-subtitle {
+  font-size: clamp(1.3rem, 4vw, 1.8rem);
+  max-width: 720px;
+  margin: 0 auto 2.5rem;
+  opacity: 0.95;
+}
+
+/* ── Special Offers ── */
+.special-offers-section {
+  padding: 6rem 0;
+  background: linear-gradient(to bottom, #fff8fb, white);
+}
+
+.offer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2.2rem;
+  margin-top: 3rem;
+}
+
+.offer-card {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 16px 40px rgba(233,30,99,0.08);
+  transition: all 0.45s cubic-bezier(0.34,1.56,0.64,1);
+  border: 1px solid rgba(232,62,140,0.08);
+}
+
+.offer-card:hover {
+  transform: translateY(-16px);
+  box-shadow: 0 32px 70px rgba(233,30,99,0.16);
+}
+
+.offer-ribbon {
+  position: absolute;
+  top: 18px;
+  right: -38px;
+  background: linear-gradient(135deg, #e83e8c, #c71585);
+  color: white;
+  padding: 8px 50px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transform: rotate(45deg);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  z-index: 2;
+}
+
+.offer-content {
+  padding: 2.2rem 1.8rem;
+  text-align: center;
+}
+
+.offer-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--pink-dark);
+}
+
+.offer-description {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.offer-expiry {
+  font-size: 0.95rem;
+  color: #e74c3c;
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+/* ── Services Page ── */
+.services-hero {
+  /* background: linear-gradient(rgba(126, 90, 120, 0.5), rgba(228, 44, 212, 0.6)); */
+  min-height: 20vh;
+  display: flex;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+
+.service-search-bar {
+  max-width: 580px;
+  margin: 0 auto 4rem;
+}
+
+.service-search-bar .form-control {
+  border-radius: 50px;
+  padding: 0.9rem 1.8rem;
+  font-size: 1.1rem;
+  border: 2px solid rgba(232,62,140,0.3);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.service-search-bar .form-control:focus {
+  border-color: var(--primary-pink);
+  box-shadow: 0 0 0 0.3rem rgba(232,62,140,0.25);
+}
+
+.category-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+}
+
+.category-tab {
+  padding: 0.8rem 1.8rem;
+  border-radius: 50px;
+  background: white;
+  border: 2px solid rgba(232,62,140,0.2);
+  color: var(--text-dark);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.category-tab.active,
+.category-tab:hover {
+  background: var(--primary-pink);
+  color: white;
+  border-color: var(--primary-pink);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(232,62,140,0.25);
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.service-card {
+  border-radius: 20px;
+  overflow: hidden;
+  background: white;
+  box-shadow: var(--shadow-md);
+  transition: all 0.4s ease;
+  position: relative;
+}
+
+.service-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 28px 60px rgba(233,30,99,0.14);
+}
+
+.service-card-body {
+  padding: 1.8rem;
+  text-align: center;
+}
+
+.service-name {
+  font-size: 1.45rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  color: var(--pink-dark);
+}
+
+.service-price {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--primary-pink);
+  margin: 1rem 0;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .service-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
