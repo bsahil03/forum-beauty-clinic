@@ -1,5 +1,6 @@
+// Corrected src/pages/User/Gallery.js
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Carousel, Alert, Spinner } from 'react-bootstrap';
+import { Container, Carousel, Alert, Spinner } from 'react-bootstrap';
 import api from '../../utils/api';
 import UserNavbar from '../../components/User/Navbar';
 import Footer from '../../components/User/Footer';
@@ -14,7 +15,7 @@ const Gallery = () => {
       setLoading(true);
       setError('');
       const res = await api.get('/photos');
-      console.log('[Gallery] Fetched photos:', res.data); // ← Very important debug line
+      console.log('[Gallery] Fetched photos:', res.data);
       const urls = res.data || [];
       setPhotos(urls);
     } catch (err) {
@@ -29,12 +30,6 @@ const Gallery = () => {
   useEffect(() => {
     fetchPhotos();
   }, []);
-
-  // Optional: auto-refresh every 30 seconds (useful during testing)
-  // useEffect(() => {
-  //   const interval = setInterval(fetchPhotos, 30000);
-  //   return () => clearInterval(interval);
-  // }, []);
 
   if (loading) {
     return (
@@ -65,7 +60,7 @@ const Gallery = () => {
                 <img
                   className="d-block w-100"
                   src={`http://localhost:5000${url}`}
-                  alt={`Gallery image ${index + 1}`}
+                  alt=""  // Fixed: empty alt for decorative images
                   style={{ maxHeight: '70vh', objectFit: 'contain' }}
                   onError={(e) => {
                     console.error('Image failed to load:', url);
@@ -79,6 +74,11 @@ const Gallery = () => {
             ))}
           </Carousel>
         )}
+
+        {/* Debug info - remove in production */}
+        <div className="mt-4 text-muted small text-center">
+          Loaded {photos.length} photo URL(s) from server
+        </div>
       </Container>
 
       <Footer />

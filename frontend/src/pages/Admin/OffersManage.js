@@ -38,8 +38,8 @@ const OffersManage = () => {
   });
 
   useEffect(() => {
-    loadOffers();
-  }, []);
+  loadOffers();
+}, [loadOffers]);  // ← add loadOffers here
 
   const loadOffers = async () => {
     try {

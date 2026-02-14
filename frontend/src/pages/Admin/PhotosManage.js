@@ -44,8 +44,8 @@ const PhotosManage = () => {
   };
 
   useEffect(() => {
-    fetchPhotos();
-  }, []);
+  fetchPhotos();
+}, [fetchPhotos]);  // ← add fetchPhotos
 
   const showToast = (variant, title, message) => {
     setToast({ show: true, variant, title, message });
