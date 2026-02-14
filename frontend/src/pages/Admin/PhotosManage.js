@@ -45,7 +45,11 @@ const PhotosManage = () => {
 
   useEffect(() => {
   fetchPhotos();
+<<<<<<< HEAD
 }, []);  // ← add fetchPhotos
+=======
+}, [] ); 
+>>>>>>> 51be6b0ea49aa5a287a8b082c72498ccae648355
 
   const showToast = (variant, title, message) => {
     setToast({ show: true, variant, title, message });
