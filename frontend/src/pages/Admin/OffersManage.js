@@ -38,13 +38,8 @@ const OffersManage = () => {
   });
 
   useEffect(() => {
-<<<<<<< HEAD
   loadOffers();
 }, []);  // ← add loadOffers here
-=======
-    loadOffers();
-  }, []);
->>>>>>> 51be6b0ea49aa5a287a8b082c72498ccae648355
 
   const loadOffers = async () => {
     try {
