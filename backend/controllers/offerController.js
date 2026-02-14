@@ -5,6 +5,7 @@ export const getOffers = async (req, res) => {
     const offers = await Offer.find().sort({ createdAt: -1 });
     res.json(offers);
   } catch (err) {
+    console.error(err);
     res.status(500).json({ msg: 'Server error' });
   }
 };
@@ -15,6 +16,7 @@ export const createOffer = async (req, res) => {
     await offer.save();
     res.status(201).json(offer);
   } catch (err) {
+    console.error(err);
     res.status(500).json({ msg: 'Server error' });
   }
 };
@@ -25,6 +27,7 @@ export const updateOffer = async (req, res) => {
     if (!offer) return res.status(404).json({ msg: 'Offer not found' });
     res.json(offer);
   } catch (err) {
+    console.error(err);
     res.status(500).json({ msg: 'Server error' });
   }
 };
@@ -35,6 +38,7 @@ export const deleteOffer = async (req, res) => {
     if (!offer) return res.status(404).json({ msg: 'Offer not found' });
     res.json({ msg: 'Offer deleted' });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ msg: 'Server error' });
   }
 };

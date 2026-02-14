@@ -1,4 +1,3 @@
-// Corrected src/pages/User/Gallery.js
 import React, { useState, useEffect } from 'react';
 import { Container, Carousel, Alert, Spinner } from 'react-bootstrap';
 import api from '../../utils/api';
@@ -59,26 +58,18 @@ const Gallery = () => {
               <Carousel.Item key={index}>
                 <img
                   className="d-block w-100"
-                  src={`http://localhost:5000${url}`}
-                  alt=""  // Fixed: empty alt for decorative images
+                  src={url}  // ← FIXED: Use raw Cloudinary URL
+                  alt=""     // Empty alt for decorative images
                   style={{ maxHeight: '70vh', objectFit: 'contain' }}
                   onError={(e) => {
                     console.error('Image failed to load:', url);
                     e.target.src = 'https://via.placeholder.com/800x600?text=Image+Not+Found';
                   }}
                 />
-                <Carousel.Caption>
-                  <h5>Image {index + 1}</h5>
-                </Carousel.Caption>
               </Carousel.Item>
             ))}
           </Carousel>
         )}
-
-        {/* Debug info - remove in production */}
-        <div className="mt-4 text-muted small text-center">
-          Loaded {photos.length} photo URL(s) from server
-        </div>
       </Container>
 
       <Footer />

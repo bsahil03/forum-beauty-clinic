@@ -45,7 +45,7 @@ const PhotosManage = () => {
 
   useEffect(() => {
   fetchPhotos();
-}, [fetchPhotos]);  // ← add fetchPhotos
+}, []);  // ← add fetchPhotos
 
   const showToast = (variant, title, message) => {
     setToast({ show: true, variant, title, message });
@@ -155,8 +155,8 @@ const PhotosManage = () => {
                 <Col key={index}>
                   <div className="position-relative overflow-hidden rounded shadow-sm">
                     <Image
-                      src={`http://localhost:5000${url}`}
-                      alt={`Gallery photo ${index + 1}`}
+                      src={url}
+                      alt=""
                       fluid
                       thumbnail
                       style={{

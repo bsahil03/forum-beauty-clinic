@@ -1,16 +1,19 @@
+import { v2 as cloudinary } from 'cloudinary';
 import Photo from '../models/Photo.js';
-import fs from 'fs/promises';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import fs from 'fs/promises';   // ← Fixed: Add this import
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
 
 export const getPhotos = async (req, res) => {
   try {
     const photos = await Photo.find();
     res.json(photos.map(p => p.url));
   } catch (err) {
+    console.error(err);
     res.status(500).json({ msg: 'Server error' });
   }
 };
@@ -18,23 +21,30 @@ export const getPhotos = async (req, res) => {
 export const uploadPhoto = async (req, res) => {
   try {
     if (!req.file) return res.status(400).json({ msg: 'No file uploaded' });
-    const url = `/uploads/${req.file.filename}`;
-    const photo = new Photo({ url });
-    await photo.save();
-    res.json({ url });
+
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: 'forum-beauty-clinic'
+    });
+
+    const newPhoto = new Photo({ url: result.secure_url });
+    await newPhoto.save();
+
+    // Delete local temp file
+    await fs.unlink(req.file.path);
+
+    res.json({ url: result.secure_url });
   } catch (err) {
-    res.status(500).json({ msg: 'Server error' });
+    console.error('Upload error:', err);
+    res.status(500).json({ msg: 'Upload failed' });
   }
 };
 
 export const deletePhoto = async (req, res) => {
   try {
     const { filename } = req.params;
-    const url = `/uploads/${filename}`;
-    await Photo.deleteOne({ url });
-    await fs.unlink(path.join(__dirname, '..', 'uploads', filename));
+    await Photo.deleteOne({ url: { $regex: filename } });
     res.json({ msg: 'Photo deleted' });
   } catch (err) {
-    res.status(500).json({ msg: 'Server error' });
+    res.status(500).json({ msg: 'Delete failed' });
   }
 };

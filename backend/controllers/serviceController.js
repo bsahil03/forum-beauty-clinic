@@ -9,6 +9,7 @@ export const getServices = async (req, res) => {
     }
     res.json(service.data);
   } catch (err) {
+    console.error(err);
     res.status(500).json({ msg: 'Server error' });
   }
 };
@@ -18,10 +19,11 @@ export const updateServices = async (req, res) => {
     const service = await Service.findOneAndUpdate(
       {},
       { data: req.body },
-      { new: true, upsert: true }
+      { upsert: true, new: true }
     );
     res.json(service.data);
   } catch (err) {
-    res.status(500).json({ msg: 'Server error' });
+    console.error(err);
+    res.status(500).json({ msg: 'Update failed' });
   }
 };
