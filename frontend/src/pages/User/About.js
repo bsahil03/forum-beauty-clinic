@@ -83,16 +83,13 @@ const About = () => {
             <Col lg={6}>
               <div className="rounded-4 overflow-hidden shadow-lg">
                 {/* Replace with real embed or image */}
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3671.123456789!2d72.456789!3d22.789012!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjLCsDQ3JzIwLjQiTiA3MsKwMjcnMjQuNCJF!5e0!3m2!1sen!2sin!4v1699999999999"
-                  width="100%"
+                <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d947113.1009514853!2d72.01576726598289!3d21.98598737694452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sforum%20beauty%20care%20aesthetic%20clinic!5e0!3m2!1sen!2sin!4v1771079691211!5m2!1sen!2sin" width="100%"
                   height="450"
                   style={{ border: 0 }}
                   allowFullScreen=""
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Clinic Location"
-                ></iframe>
+                  title="Clinic Location"></iframe>
               </div>
             </Col>
           </Row>
