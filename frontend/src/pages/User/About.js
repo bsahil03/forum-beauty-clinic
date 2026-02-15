@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import React, { useState, useEffect, useRef } from 'react';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import api from '../../utils/api';
 import UserNavbar from '../../components/User/Navbar';
 import Footer from '../../components/User/Footer';
@@ -8,6 +8,49 @@ import LoadingSpinner from '../../components/shared/LoadingSpinner';
 const About = () => {
   const [info, setInfo] = useState({});
   const [loading, setLoading] = useState(true);
+  const widgetId = useRef(`trustindex_widget_${Date.now()}`); // Unique ID per mount
+
+  useEffect(() => {
+    // Create unique container
+    const container = document.createElement('div');
+    container.id = widgetId.current;
+    container.style.width = '100%';
+    container.style.minHeight = '400px';
+
+    // Find section and append container
+    const section = document.querySelector('#trustindex-section');
+    if (section) section.appendChild(container);
+
+    // Load script only once per session
+    if (!document.getElementById('trustindex-script')) {
+      const script = document.createElement('script');
+      script.id = 'trustindex-script';
+      script.src = 'https://cdn.trustindex.io/loader.js?2562a6464ccf849c9d969e9d626';
+      script.async = true;
+      script.defer = true;
+      document.body.appendChild(script);
+    }
+
+    // Cleanup on unmount (remove script + container + any injected content)
+    return () => {
+      // Remove script
+      const script = document.getElementById('trustindex-script');
+      if (script && script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+
+      // Remove our container
+      const container = document.getElementById(widgetId.current);
+      if (container && container.parentNode) {
+        container.parentNode.removeChild(container);
+      }
+
+      // Aggressive cleanup: remove ALL Trustindex elements
+      document.querySelectorAll('[id^="trustindex_"], [class*="trustindex"], .ti-widget').forEach(el => {
+        if (el.parentNode) el.parentNode.removeChild(el);
+      });
+    };
+  }, []);
 
   useEffect(() => {
     api.get('/info').then(res => {
@@ -36,7 +79,6 @@ const About = () => {
           </Row>
 
           <Row className="g-5 align-items-center">
-            {/* Left - Info */}
             <Col lg={6}>
               <Card className="border-0 shadow-lg p-4 p-lg-5 rounded-4 h-100">
                 <Card.Body>
@@ -79,22 +121,33 @@ const About = () => {
               </Card>
             </Col>
 
-            {/* Right - Map or Image */}
             <Col lg={6}>
               <div className="rounded-4 overflow-hidden shadow-lg">
-                {/* Replace with real embed or image */}
-                <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d947113.1009514853!2d72.01576726598289!3d21.98598737694452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sforum%20beauty%20care%20aesthetic%20clinic!5e0!3m2!1sen!2sin!4v1771079691211!5m2!1sen!2sin" width="100%"
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d947113.1009514853!2d72.01576726598289!3d21.98598737694452!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sforum%20beauty%20care%20aesthetic%20clinic!5e0!3m2!1sen!2sin!4v1771079691211!5m2!1sen!2sin"
+                  width="100%"
                   height="450"
                   style={{ border: 0 }}
                   allowFullScreen=""
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
-                  title="Clinic Location"></iframe>
+                  title="Clinic Location"
+                ></iframe>
               </div>
             </Col>
           </Row>
         </Container>
       </div>
+
+      {/* Google Reviews – only here */}
+      <section className="my-5" id="trustindex-section">
+        <h2 className="text-center mb-4" style={{ color: 'var(--primary-pink)' }}>
+          What Our Clients Say on Google
+        </h2>
+
+        {/* Dynamic container – Trustindex will inject here */}
+        <div id={widgetId.current} style={{ width: '100%' }}></div>
+      </section>
 
       <Footer />
     </>
