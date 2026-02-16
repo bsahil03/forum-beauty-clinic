@@ -1,116 +1,129 @@
 /* user-professional.css – Premium Beauty Clinic User UI (2025) */
 
-.user-hero {
+
+.hero-section {
+  min-height: 80vh;
   background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.55)),
               url('your-hero-image.png') center/cover no-repeat;
-  min-height: 80vh;
-  display: flex;
-  align-items: center;
-  color: white;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.7);
   position: relative;
+  color: white;
 }
 
-.user-hero::before {
-  content: '';
+.hero-bg {
+  background: linear-gradient(135deg, rgba(232,62,140,0.12), rgba(212,175,55,0.08));
   position: absolute;
   inset: 0;
-  background: linear-gradient(45deg, rgba(232,62,140,0.15), rgba(212,175,55,0.1));
-  z-index: 1;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 900px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 2rem;
 }
 
 .hero-title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(3.2rem, 8vw, 5.5rem);
+  font-size: clamp(3.5rem, 8vw, 6rem);
   font-weight: 700;
-  margin-bottom: 1.2rem;
-  letter-spacing: -1px;
+  letter-spacing: -1.5px;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.6);
 }
 
 .hero-subtitle {
-  font-size: clamp(1.3rem, 4vw, 1.8rem);
-  max-width: 720px;
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  max-width: 800px;
   margin: 0 auto 2.5rem;
   opacity: 0.95;
 }
 
-/* ── Special Offers ── */
+/* ── Special Offers – Premium Professional Look (2025) ── */
 .special-offers-section {
-  padding: 6rem 0;
-  background: linear-gradient(to bottom, #fff8fb, white);
+  padding: 6rem 0 5rem;
+  background: linear-gradient(to bottom, #fff8fb 0%, #ffffff 100%);
+}
+
+.offer-section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 6vw, 3.8rem);
+  font-weight: 700;
+  color: var(--pink-dark);
+  margin-bottom: 3.5rem;
+  letter-spacing: -0.5px;
+  position: relative;
+  display: inline-block;
+}
+
+.offer-section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-pink), var(--secondary-gold));
+  border-radius: 3px;
 }
 
 .offer-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-  gap: 2.2rem;
-  margin-top: 3rem;
+  gap: 2.5rem;
 }
 
 .offer-card {
   position: relative;
-  border-radius: 24px;
+  border: none;
+  border-radius: 16px;
   overflow: hidden;
   background: white;
-  box-shadow: 0 16px 40px rgba(233,30,99,0.08);
-  transition: all 0.45s cubic-bezier(0.34,1.56,0.64,1);
-  border: 1px solid rgba(232,62,140,0.08);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .offer-card:hover {
-  transform: translateY(-16px);
-  box-shadow: 0 32px 70px rgba(233,30,99,0.16);
+  transform: translateY(-12px);
+  box-shadow: 0 20px 50px rgba(232,62,140,0.12);
 }
 
-.offer-ribbon {
-  position: absolute;
-  top: 18px;
-  right: -38px;
-  background: linear-gradient(135deg, #e83e8c, #c71585);
-  color: white;
-  padding: 8px 50px;
-  font-size: 0.95rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  transform: rotate(45deg);
-  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
-  z-index: 2;
-}
-
-.offer-content {
+.offer-card .card-body {
   padding: 2.2rem 1.8rem;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .offer-title {
-  font-size: 1.6rem;
+  font-size: 1.55rem;
   font-weight: 700;
   margin-bottom: 1rem;
   color: var(--pink-dark);
+  line-height: 1.3;
 }
 
 .offer-description {
   color: var(--text-muted);
-  margin-bottom: 1.5rem;
   font-size: 1.05rem;
-  line-height: 1.6;
+  line-height: 1.65;
+  margin-bottom: 1.5rem;
+  flex-grow: 1;
 }
 
 .offer-expiry {
   font-size: 0.95rem;
   color: #e74c3c;
   font-weight: 600;
-  margin-top: 1rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(231,76,60,0.15);
+}
+
+.offer-badge {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  background: linear-gradient(135deg, var(--primary-pink), var(--pink-dark));
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 0.45em 1.1em;
+  border-radius: 50px;
+  box-shadow: 0 4px 12px rgba(232,62,140,0.25);
+  z-index: 2;
 }
 
 /* ── Services Page ── */
@@ -213,5 +226,32 @@
 @media (max-width: 992px) {
   .service-grid {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+  .hero-title {
+    font-size: clamp(3rem, 7vw, 4.5rem);
+  }
+  .hero-subtitle {
+    font-size: clamp(1.2rem, 3.5vw, 1.6rem);
+  }
+  .special-offers-section {
+    padding: 5rem 0 4rem;
+  }
+  .offer-grid {
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-section {
+    min-height: 70vh;
+  }
+   .offer-title {
+    font-size: 1.4rem;
+  }
+  .offer-description {
+    font-size: 1rem;
+  }
+  .offer-section-title {
+    font-size: 2.6rem;
   }
 }
