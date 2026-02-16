@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Button, Carousel } from 'react-bootstrap';
+import { Container, Row, Col, Button, Card } from 'react-bootstrap'; // Removed Carousel
 import api from '../../utils/api';
 import UserNavbar from '../../components/User/Navbar';
 import Footer from '../../components/User/Footer';
@@ -37,61 +37,77 @@ const Home = () => {
     <>
       <UserNavbar />
 
-      {/* Hero */}
-      <section className="user-hero">
-        <div className="hero-content">
-          <h1 className="hero-title">
+      {/* Hero Section – Clean & Elegant */}
+      <section className="hero-section position-relative text-white d-flex align-items-center">
+        <div 
+          className="position-absolute top-0 start-0 w-100 h-100"
+          style={{
+            background: 'linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.6))',
+            zIndex: 1
+          }}
+        ></div>
+        <div className="hero-bg position-absolute top-0 start-0 w-100 h-100"></div>
+
+        <Container className="position-relative z-2 text-center py-5">
+          <h1 className="display-4 fw-bold mb-4 hero-title">
             {info.name || 'Forum Beauty Care'}
           </h1>
-          <p className="hero-subtitle">
+          <p className="lead mb-5 opacity-90 hero-subtitle">
             Premium Aesthetic & Beauty Treatments Crafted with Elegance
           </p>
           <Button
             size="lg"
-            className="rounded-pill px-5 py-3 fw-bold"
+            className="rounded-pill px-5 py-3 fw-bold shadow"
             style={{
-              background: 'var(--primary-pink)',
+              backgroundColor: 'var(--primary-pink)',
               border: 'none',
-              fontSize: '1.25rem',
+              fontSize: '1.3rem',
+              transition: 'all 0.3s ease'
             }}
             href="/services"
           >
-            Explore Services
+            Explore Our Services
           </Button>
-        </div>
+        </Container>
       </section>
 
-      {/* Special Offers */}
+      {/* Special Offers – Professional & Responsive */}
       {offers.length > 0 && (
-        <section className="special-offers-section">
-          <Container>
-            <h2 className="text-center display-5 fw-bold mb-5" style={{ color: 'var(--pink-dark)' }}>
-              Current Special Offers
-            </h2>
+  <section className="special-offers-section">
+    <Container>
+      <h2 className="offer-section-title text-center">
+        Current Special Offers
+      </h2>
 
-            <div className="offer-grid">
-              {offers.map(offer => (
-                <div key={offer._id} className="offer-card">
-                  <div className="offer-ribbon">Limited Offer</div>
-                  <div className="offer-content">
-                    <h3 className="offer-title">{offer.title}</h3>
-                    <p className="offer-description">{offer.description}</p>
-                    {offer.expiry && (
-                      <div className="offer-expiry">
-                        Valid until {new Date(offer.expiry).toLocaleDateString('en-IN', {
-                          day: 'numeric',
-                          month: 'long',
-                          year: 'numeric'
-                        })}
-                      </div>
-                    )}
-                  </div>
+      <div className="offer-grid">
+        {offers.map(offer => (
+          <div key={offer._id} className="offer-card">
+            {offer.expiry && (
+              <span className="offer-badge">
+                Limited Offer
+              </span>
+            )}
+
+            <div className="card-body">
+              <h5 className="offer-title">{offer.title}</h5>
+              <p className="offer-description">{offer.description}</p>
+              
+              {offer.expiry && (
+                <div className="offer-expiry">
+                  Valid until {new Date(offer.expiry).toLocaleDateString('en-IN', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric'
+                  })}
                 </div>
-              ))}
+              )}
             </div>
-          </Container>
-        </section>
-      )}
+          </div>
+        ))}
+      </div>
+    </Container>
+  </section>
+)}
 
       <Footer />
     </>
