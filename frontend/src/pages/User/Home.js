@@ -71,44 +71,48 @@ const Home = () => {
         </Container>
       </section>
 
-      {/* Special Offers – Professional & Responsive */}
-      {offers.length > 0 && (
-  <section className="special-offers-section">
+  {/* Special Offers – Professional & Fully Responsive */}
+{offers.length > 0 && (
+  <section className="special-offers-section py-5 bg-light">
     <Container>
-      <h2 className="offer-section-title text-center">
+      <h2 className="text-center display-5 fw-bold mb-5" style={{ color: 'var(--pink-dark)' }}>
         Current Special Offers
       </h2>
 
-      <div className="offer-grid">
+      <Row xs={1} sm={2} lg={3} className="g-4">
         {offers.map(offer => (
-          <div key={offer._id} className="offer-card">
-            {offer.expiry && (
-              <span className="offer-badge">
-                Limited Offer
-              </span>
-            )}
+          <Col key={offer._id}>
+            <Card className="h-100 border-0 shadow-sm rounded-4 overflow-hidden offer-card">
+              <Card.Body className="p-4 position-relative d-flex flex-column">
+                {/* Limited Offer Badge – Top-right corner, inside card */}
+                
 
-            <div className="card-body">
-              <h5 className="offer-title">{offer.title}</h5>
-              <p className="offer-description">{offer.description}</p>
-              
-              {offer.expiry && (
-                <div className="offer-expiry">
-                  Valid until {new Date(offer.expiry).toLocaleDateString('en-IN', {
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric'
-                  })}
-                </div>
-              )}
-            </div>
-          </div>
+                <h5 className="card-title fw-bold mb-3 pe-5 pe-md-0" style={{ color: 'var(--pink-dark)' }}>
+                  {offer.title}
+                </h5>
+
+                <p className="card-text text-muted flex-grow-1 mb-4" style={{ fontSize: '1.05rem', lineHeight: '1.65' }}>
+                  {offer.description}
+                </p>
+
+                {offer.expiry && (
+                  <div className="text-danger fw-semibold small mt-auto pt-3 border-top border-danger-subtle">
+                    Valid until {new Date(offer.expiry).toLocaleDateString('en-IN', {
+                      day: 'numeric',
+                      month: 'long',
+                      year: 'numeric'
+                    })}
+                    
+                  </div>
+                )}
+              </Card.Body>
+            </Card>
+          </Col>
         ))}
-      </div>
+      </Row>
     </Container>
   </section>
 )}
-
       <Footer />
     </>
   );
