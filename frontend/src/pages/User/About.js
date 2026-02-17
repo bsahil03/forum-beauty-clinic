@@ -8,49 +8,6 @@ import LoadingSpinner from '../../components/shared/LoadingSpinner';
 const About = () => {
   const [info, setInfo] = useState({});
   const [loading, setLoading] = useState(true);
-  const widgetId = useRef(`trustindex_widget_${Date.now()}`); // Unique ID per mount
-
-  useEffect(() => {
-    // Create unique container
-    const container = document.createElement('div');
-    container.id = widgetId.current;
-    container.style.width = '100%';
-    container.style.minHeight = '400px';
-
-    // Find section and append container
-    const section = document.querySelector('#trustindex-section');
-    if (section) section.appendChild(container);
-
-    // Load script only once per session
-    if (!document.getElementById('trustindex-script')) {
-      const script = document.createElement('script');
-      script.id = 'trustindex-script';
-      script.src = 'https://cdn.trustindex.io/loader.js?2562a6464ccf849c9d969e9d626';
-      script.async = true;
-      script.defer = true;
-      document.body.appendChild(script);
-    }
-
-    // Cleanup on unmount (remove script + container + any injected content)
-    return () => {
-      // Remove script
-      const script = document.getElementById('trustindex-script');
-      if (script && script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-
-      // Remove our container
-      const container = document.getElementById(widgetId.current);
-      if (container && container.parentNode) {
-        container.parentNode.removeChild(container);
-      }
-
-      // Aggressive cleanup: remove ALL Trustindex elements
-      document.querySelectorAll('[id^="trustindex_"], [class*="trustindex"], .ti-widget').forEach(el => {
-        if (el.parentNode) el.parentNode.removeChild(el);
-      });
-    };
-  }, []);
 
   useEffect(() => {
     api.get('/info').then(res => {
@@ -138,16 +95,6 @@ const About = () => {
           </Row>
         </Container>
       </div>
-
-      {/* Google Reviews – only here */}
-      <section className="my-5" id="trustindex-section">
-        <h2 className="text-center mb-4" style={{ color: 'var(--primary-pink)' }}>
-          What Our Clients Say on Google
-        </h2>
-
-        {/* Dynamic container – Trustindex will inject here */}
-        <div id={widgetId.current} style={{ width: '100%'}}></div>
-      </section>
 
       <Footer />
     </>
